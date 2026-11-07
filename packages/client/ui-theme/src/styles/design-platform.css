@@ -165,7 +165,12 @@ body {
   --dsw-alias-bg-mask-3: rgba(0, 0, 0, 0.48);
   --dsw-alias-bg-mask-photo: rgba(0, 0, 0, 0.88);
   --dsw-alias-bg-mask-drop: rgba(255, 255, 255, 0.7);
-  --dsw-alias-bg-module-platform: var(--dsw-static-neutral-bluish-60);
+  /* The shared module/selected-surface fill (settings rows, the Agent-modes
+     toggle, the Appearance cubes, expanded editor cards). It resolves to the
+     theme's WARM module tone so every one of those surfaces stays in the beige
+     family; the cool neutral-bluish-60 it held before read as a bright foreign
+     block on the beige page. */
+  --dsw-alias-bg-module-platform: var(--dsw-specific-selector);
   --dsw-alias-bg-multi-select: var(--dsw-static-neutral-bluish-60);
   --dsw-alias-bg-overlay: var(--dsw-static-neutral-bluish-150);
   --dsw-alias-bg-skeleton: rgba(0, 0, 0, 0.04);
@@ -201,7 +206,11 @@ body {
   --dsw-alias-interactive-bg-hover-solid: var(--dsw-static-neutral-bluish-75);
   --dsw-alias-interactive-bg-hover: rgba(0, 0, 0, 0.04);
   --dsw-alias-label-caption: var(--dsw-static-neutral-bluish-400);
-  --dsw-alias-label-dimmed: var(--dsw-static-neutral-bluish-200);
+  /* A PLACEHOLDER tone, not a disabled one: it must stay readable against the
+     beige `bg-layer-1` input fill, so it takes the secondary-label step
+     (neutral-bluish-700, ~5.5:1 on the fill) rather than the near-invisible
+     bluish-200 this alias held before. */
+  --dsw-alias-label-dimmed: var(--dsw-static-neutral-bluish-700);
   --dsw-alias-label-primary-bluish: var(--dsw-static-blue-900);
   --dsw-alias-label-primary-dimmed: var(--dsw-static-neutral-bluish-950);
   --dsw-alias-label-primary-foreground: var(--dsw-static-neutral-bluish-00);

@@ -201,10 +201,13 @@
 
 /* Selected tab is blue, not ink: brand-primary resolves to neutral black in
    this token sheet, so the selected state rides the business blue — the
-   nearest semantic token that stays blue in both themes. */
+   nearest semantic token that stays blue in both themes. The fill is the warm
+   active-item accent rather than a dark charcoal: on the beige page a dark
+   pill read as heavy, so the selected tab is now a light warm step that keeps
+   ink text legible. */
 .tabActive {
-  color: #000000;
-  background: #3f3e3b;
+  color: var(--dsw-alias-label-primary);
+  background: var(--dsw-specific-sidebar-nav-item-active-accent);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0);
 }
 

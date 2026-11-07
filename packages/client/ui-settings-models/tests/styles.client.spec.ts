@@ -53,9 +53,11 @@ describe('ModelsSection theme styles', () => {
   })
 
   it('separates the row card from the editor it expands into', () => {
-    // `bg-layer-3` and `bg-module-platform` both resolve to neutral-bluish-800
-    // under the dark theme, so filling the row with either erases the nested
-    // editor's boundary. The row is outlined; the fill is the editor's alone.
+    // The row is outlined and carries no fill, so the expanded editor's fill is
+    // the only thing drawing the nested boundary. That fill is the shared module
+    // token, whose light value the theme points at the warm module tone so the
+    // card stays in the beige page's family rather than reading as a bright cool
+    // block on the beige panel.
     expect(block('.editor')).toContain('background: var(--dsw-alias-bg-module-platform)')
     expect(block('.rowCard')).toContain('border: 0.5px solid var(--dsw-alias-border-l4)')
     expect(block('.rowCard')).not.toMatch(/\bbackground\s*:/)

@@ -220,7 +220,9 @@
 }
 
 /* Editing surface: a filled module on the panel, matching the settings
-   selector fill rather than adding another outline inside the row. */
+   selector fill rather than adding another outline inside the row. The fill
+   comes from `bg-module-platform`, whose light value the theme points at the
+   warm module tone so this card stays in the beige page's family. */
 .editor {
   border-radius: 12px;
   background: var(--dsw-alias-bg-module-platform);
@@ -327,6 +329,8 @@
   border-radius: 16px;
 }
 
+/* Same module fill as the editor card above; the theme points
+   `bg-module-platform` at the warm tone in light mode. */
 .addCard,
 .setupCard {
   border-radius: 12px;
