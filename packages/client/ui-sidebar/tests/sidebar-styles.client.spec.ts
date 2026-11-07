@@ -61,7 +61,10 @@ describe('SidebarRoot.module.css', () => {
   it('gives shell rail controls the same base anchor for their shared translation', () => {
     expect(declarations('.collapsed .logoRow')?.get('justify-content')).toBe('flex-start')
     expect(declarations('.collapsed .newSession')?.get('align-self')).toBe('flex-start')
-    expect(declarations('.collapsed .newSession')?.get('width')).toBe('36px')
+    // The collapsed rail button matches the expanded 38px bar (the warm-theme
+    // restyle unified the two sizes); the test tracks the source, not the old
+    // 36px rail footprint.
+    expect(declarations('.collapsed .newSession')?.get('width')).toBe('38px')
   })
 
   it('keeps the slotted brand row at the full artwork height', () => {
