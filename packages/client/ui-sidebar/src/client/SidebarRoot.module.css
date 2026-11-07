@@ -363,8 +363,16 @@
   white-space: nowrap;
 }
 
-/* New Session: 38px bar, pill shape with black background */
+/* New Session: 38px bar, pill shape. The light theme renders it as a black
+   pill (high contrast on the beige sidebar); the dark theme inverts to a white
+   pill so the primary action stays a solid, high-contrast slab against the
+   near-black sidebar (a black-on-black button would read as a hole). The
+   per-theme values live in the two custom properties below so every variant
+   (darwin vibrancy, collapsed rail) inherits them from the same element. */
 .newSession {
+  --dsh-new-session-fill: #000000;
+  --dsh-new-session-fill-hover: #333333;
+  --dsh-new-session-ink: #ffffff;
   flex: none;
   display: flex;
   align-items: center;
@@ -376,8 +384,8 @@
   box-sizing: border-box;
   border: none;
   border-radius: 999px;
-  background: #000000;
-  color: #ffffff;
+  background: var(--dsh-new-session-fill);
+  color: var(--dsh-new-session-ink);
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
@@ -386,18 +394,18 @@
 }
 
 .newSession:hover {
-  background: #333333;
+  background: var(--dsh-new-session-fill-hover);
 }
 
 /* macOS: the solid elevated fill reads as a foreign slab on the vibrancy
    sidebar; letting a quarter of the material through keeps the card visible
    while it sits in the glass. */
 :global([data-platform='darwin']) .newSession {
-  background: #000000;
+  background: var(--dsh-new-session-fill);
 }
 
 :global([data-platform='darwin']) .newSession:hover {
-  background: #333333;
+  background: var(--dsh-new-session-fill-hover);
 }
 
 .collapsed .newSession {
@@ -408,11 +416,20 @@
   margin: 0 0 12px;
   gap: 0;
   border-color: transparent;
-  background: #000000;
+  background: var(--dsh-new-session-fill);
 }
 
 .collapsed .newSession:hover {
-  background: #333333;
+  background: var(--dsh-new-session-fill-hover);
+}
+
+/* Dark theme: invert the primary pill (white fill, black ink, off-white
+   hover) so it keeps the light theme's solid-slab contrast on the dark
+   sidebar, matching a mainstream dark primary button. */
+:global(body[data-ds-dark-theme]) .newSession {
+  --dsh-new-session-fill: #ffffff;
+  --dsh-new-session-fill-hover: #e6e6e6;
+  --dsh-new-session-ink: #000000;
 }
 
 .newSessionLabel {

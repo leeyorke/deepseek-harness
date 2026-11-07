@@ -164,8 +164,13 @@
 }
 
 /* figma Tab_Group 34:11441: 35px strip, gap 36, pad-left 8, tabs bottom-aligned.
-   Positioned above the header's own paint, so the active bar covers the rule. */
+   Positioned above the header's own paint, so the active bar covers the rule.
+   The strip is a recessed well: the light theme fills it with the warm
+   sidebar-fill tone, and the dark theme swaps to a dark module tone so the well
+   stays visible against the near-black bg-base instead of rendering as a bright
+   beige slab. */
 .tabs {
+  --dsh-tabs-well: #e9e7e0;
   position: relative;
   z-index: 1;
   display: inline-flex;
@@ -173,8 +178,12 @@
   margin-top: 10px;
   padding: 3px;
   border-radius: 12px;
-  background: #e9e7e0;
+  background: var(--dsh-tabs-well);
   width: fit-content;
+}
+
+:global(body[data-ds-dark-theme]) .tabs {
+  --dsh-tabs-well: var(--dsw-static-neutral-bluish-800);
 }
 
 /* figma .Tab 34:11442: 13/16 text (figma wt510, rendered 500). The 2px bar
