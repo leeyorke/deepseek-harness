@@ -203,9 +203,9 @@
    this token sheet, so the selected state rides the business blue — the
    nearest semantic token that stays blue in both themes. */
 .tabActive {
-  color: #ffffff;
-  background: #000000;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  color: #000000;
+  background: #3f3e3b;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0);
 }
 
 .tabActive::after {
