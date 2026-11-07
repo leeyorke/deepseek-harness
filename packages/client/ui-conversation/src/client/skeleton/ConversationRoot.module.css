@@ -17,7 +17,7 @@
   box-sizing: border-box;
   min-height: 76px;
   padding: 10px 28px 0 20px;
-  border-bottom: 0.5px solid var(--dsw-alias-border-l3);
+  border-bottom: none;
 }
 
 /* Blank Sessions retain navigation controls without conversation title or tabs. */
@@ -168,10 +168,13 @@
 .tabs {
   position: relative;
   z-index: 1;
-  display: flex;
-  gap: 36px;
+  display: inline-flex;
+  gap: 2px;
   margin-top: 10px;
-  padding-left: 8px;
+  padding: 3px;
+  border-radius: 12px;
+  background: #e9e7e0;
+  width: fit-content;
 }
 
 /* figma .Tab 34:11442: 13/16 text (figma wt510, rendered 500). The 2px bar
@@ -179,36 +182,34 @@
    sitting over the rule. */
 .tab {
   position: relative;
-  padding: 0 0 9px;
+  padding: 5px 14px;
   border: none;
+  border-radius: 12px;
   background: transparent;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 16px;
   font-weight: 500;
   color: var(--dsw-alias-label-tertiary);
   cursor: pointer;
+  transition: background-color 150ms ease;
 }
 
 .tab::after {
   content: '';
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  height: 2px;
-  border-radius: 2px;
-  background: transparent;
+  display: none;
 }
 
 /* Selected tab is blue, not ink: brand-primary resolves to neutral black in
    this token sheet, so the selected state rides the business blue — the
    nearest semantic token that stays blue in both themes. */
 .tabActive {
-  color: var(--dsw-alias-state-business-primary);
+  color: #ffffff;
+  background: #000000;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .tabActive::after {
-  background: var(--dsw-alias-state-business-primary);
+  display: none;
 }
 
 .viewArea {

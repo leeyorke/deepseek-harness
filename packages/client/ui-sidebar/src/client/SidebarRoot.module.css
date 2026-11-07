@@ -363,8 +363,7 @@
   white-space: nowrap;
 }
 
-/* New Session: 38px bar, 12px radius (figma 133:7634 geometry, squared-off
-   corners); collapsed it renders as the rail's plain icon control. */
+/* New Session: 38px bar, pill shape with black background */
 .newSession {
   flex: none;
   display: flex;
@@ -375,10 +374,10 @@
   padding: 8px 16px;
   margin: 0 2px 12px;
   box-sizing: border-box;
-  border: 0.5px solid var(--dsw-alias-border-l3);
-  border-radius: 12px;
-  background: var(--dsw-alias-button-elevated-fill);
-  color: var(--dsw-alias-label-primary);
+  border: none;
+  border-radius: 999px;
+  background: #000000;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
@@ -387,33 +386,33 @@
 }
 
 .newSession:hover {
-  background: var(--dsw-alias-button-floating-hover);
+  background: #333333;
 }
 
 /* macOS: the solid elevated fill reads as a foreign slab on the vibrancy
    sidebar; letting a quarter of the material through keeps the card visible
    while it sits in the glass. */
 :global([data-platform='darwin']) .newSession {
-  background: color-mix(in srgb, var(--dsw-alias-button-elevated-fill) 75%, transparent);
+  background: #000000;
 }
 
 :global([data-platform='darwin']) .newSession:hover {
-  background: color-mix(in srgb, var(--dsw-alias-button-floating-hover) 75%, transparent);
+  background: #333333;
 }
 
 .collapsed .newSession {
   align-self: flex-start;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   padding: 0;
   margin: 0 0 12px;
   gap: 0;
   border-color: transparent;
-  background: transparent;
+  background: #000000;
 }
 
 .collapsed .newSession:hover {
-  background: var(--dsw-alias-interactive-bg-hover);
+  background: #333333;
 }
 
 .newSessionLabel {
@@ -449,6 +448,7 @@
   background: transparent;
   color: var(--dsw-alias-label-primary);
   font: inherit;
+  font-weight: 600;
   line-height: 22px;
   text-align: left;
   cursor: pointer;
@@ -529,6 +529,12 @@
   flex: none;
   min-width: 0;
   width: 100%;
+}
+
+.settingsArea {
+  border-top: 1px solid var(--dsw-alias-border-l3);
+  padding-top: 12px;
+  margin-top: 12px;
 }
 
 .footerActions {

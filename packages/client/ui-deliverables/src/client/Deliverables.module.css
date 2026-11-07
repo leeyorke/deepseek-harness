@@ -1,5 +1,5 @@
 /** Delivery cards use one full-width row or a two-column, four-card summary. */
-.root { --deliverable-fill: var(--dsw-static-neutral-50); --deliverable-hover: var(--dsw-static-neutral-100); container-type: inline-size; display: flex; flex-direction: column; gap: 16px; min-width: 0; margin-top: 4px; }
+.root { --deliverable-fill: #e5e3dc; --deliverable-hover: #dfddd6; container-type: inline-size; display: flex; flex-direction: column; gap: 16px; min-width: 0; margin-top: 4px; }
 /* The turn-tail gap alone separates adjacent file sections. The default top
    margin remains when deliveries are the first file section after prose. */
 .root[data-after-changes='true'] { margin-top: 0; }

@@ -4,6 +4,8 @@
 .root {
   display: inline-flex;
   flex: none;
+  align-items: center;
+  line-height: 20px;
 }
 
 .trigger {
@@ -11,15 +13,16 @@
   align-items: center;
   gap: 6px;
   flex: none;
-  padding: 1px 8px;
+  height: 42px;
+  padding: 0 10px 0 8px;
   border: none;
-  border-radius: 24px;
+  border-radius: 12px;
   background: transparent;
   color: var(--dsw-alias-label-tertiary);
   font-family: inherit;
-  font-size: var(--dsh-content-font-size-secondary, 13px);
+  font-size: 14px;
   font-variant-numeric: tabular-nums;
-  line-height: calc(20px + var(--dsh-content-font-delta-secondary, 0px));
+  line-height: 22px;
   white-space: nowrap;
   cursor: pointer;
 }

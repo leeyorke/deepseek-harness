@@ -65,6 +65,11 @@
   line-height: 20px;
   opacity: 1;
   visibility: visible;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--dsw-alias-label-secondary);
+  font-size: 11px;
+  letter-spacing: 0.5px;
   transition:
     max-width 180ms var(--ds-ease-in-out),
     margin-right 180ms var(--ds-ease-in-out),

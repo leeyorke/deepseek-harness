@@ -154,12 +154,12 @@ body[data-ds-dark-theme] {
 }
 
 body {
-  --dsw-alias-bg-base: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-base: #f2f0e9;
   --dsw-alias-bg-document-preview: var(--dsw-static-neutral-bluish-750);
   --dsw-alias-label-document-preview: var(--dsw-static-neutral-bluish-200);
-  --dsw-alias-bg-layer-1: var(--dsw-static-neutral-bluish-00);
-  --dsw-alias-bg-layer-2: var(--dsw-static-neutral-bluish-00);
-  --dsw-alias-bg-layer-3: var(--dsw-static-neutral-bluish-00);
+  --dsw-alias-bg-layer-1: #f2f0e9;
+  --dsw-alias-bg-layer-2: #f2f0e9;
+  --dsw-alias-bg-layer-3: #f2f0e9;
   --dsw-alias-bg-mask-1: rgba(0, 0, 0, 0.24);
   --dsw-alias-bg-mask-2: rgba(0, 0, 0, 0.12);
   --dsw-alias-bg-mask-3: rgba(0, 0, 0, 0.48);
@@ -181,14 +181,14 @@ body {
   --dsw-alias-brand-primary: var(--dsw-static-neutral-bluish-1000);
   --dsw-alias-brand-text: var(--dsw-static-neutral-bluish-1000);
   --dsw-alias-button-contrast-fill: var(--dsw-static-neutral-bluish-700);
-  --dsw-alias-button-elevated-fill: var(--dsw-static-neutral-bluish-00);
-  --dsw-alias-button-floating-fill: var(--dsw-static-neutral-bluish-00);
-  --dsw-alias-button-floating-hover: var(--dsw-static-neutral-bluish-75);
+  --dsw-alias-button-elevated-fill: #f2f0e9;
+  --dsw-alias-button-floating-fill: #f2f0e9;
+  --dsw-alias-button-floating-hover: #e5e3dc;
   --dsw-alias-button-ghost-active-border: var(--dsw-static-neutral-bluish-500);
   --dsw-alias-button-ghost-active-fill: var(--dsw-static-neutral-bluish-100);
   --dsw-alias-button-ghost-active-hover: var(--dsw-static-neutral-bluish-150);
-  --dsw-alias-button-info-fill: var(--dsw-static-deepseek-500);
-  --dsw-alias-button-info-hover: var(--dsw-static-deepseek-400);
+  --dsw-alias-button-info-fill: #000000;
+  --dsw-alias-button-info-hover: #333333;
   --dsw-alias-button-primary-dimmed: var(--dsw-static-neutral-bluish-100);
   --dsw-alias-button-primary-fill: var(--dsw-alias-brand-primary);
   --dsw-alias-button-primary-hover: var(--dsw-static-neutral-bluish-750);
@@ -199,7 +199,7 @@ body {
   --dsw-alias-interactive-bg-hover-accent: rgba(38, 49, 72, 0.14);
   --dsw-alias-interactive-bg-hover-danger: rgba(236, 19, 19, 0.05);
   --dsw-alias-interactive-bg-hover-solid: var(--dsw-static-neutral-bluish-75);
-  --dsw-alias-interactive-bg-hover: rgba(38, 49, 72, 0.06);
+  --dsw-alias-interactive-bg-hover: rgba(0, 0, 0, 0.04);
   --dsw-alias-label-caption: var(--dsw-static-neutral-bluish-400);
   --dsw-alias-label-dimmed: var(--dsw-static-neutral-bluish-200);
   --dsw-alias-label-primary-bluish: var(--dsw-static-blue-900);
@@ -208,21 +208,21 @@ body {
   --dsw-alias-label-primary-inverted: var(--dsw-static-neutral-bluish-00);
   --dsw-alias-label-primary: var(--dsw-static-neutral-bluish-1000);
   --dsw-alias-label-secondary: var(--dsw-static-neutral-bluish-700);
-  --dsw-alias-label-tertiary: var(--dsw-static-neutral-bluish-600);
+  --dsw-alias-label-tertiary: #999999;
   --dsw-alias-link: var(--dsw-static-deepseek-500);
   --dsw-alias-markdown-citation: var(--dsw-static-neutral-bluish-100);
-  --dsw-alias-markdown-code-block-banner: var(--dsw-static-neutral-bluish-50);
-  --dsw-alias-markdown-code-block: var(--dsw-static-neutral-bluish-50);
+  --dsw-alias-markdown-code-block-banner: #e0ded6;
+  --dsw-alias-markdown-code-block: #e0ded6;
   --dsw-alias-markdown-code-segment-selected: var(--dsw-static-neutral-bluish-00);
   --dsw-alias-markdown-code-segment-unselected: var(--dsw-static-neutral-bluish-75);
-  --dsw-alias-markdown-inline-code: var(--dsw-static-neutral-50);
+  --dsw-alias-markdown-inline-code: #e0ded6;
   --dsw-alias-markdown-placeholder: var(--dsw-static-neutral-bluish-60);
   --dsw-alias-markdown-tag: var(--dsw-static-neutral-bluish-75);
   --dsw-alias-scrollbar-bg-l1: var(--dsw-static-neutral-200);
   --dsw-alias-scrollbar-bg-l2: var(--dsw-static-neutral-200);
   --dsw-alias-scrollbar-hover-l1: var(--dsw-static-neutral-300);
   --dsw-alias-scrollbar-hover-l2: var(--dsw-static-neutral-300);
-  --dsw-alias-state-business-primary: var(--dsw-static-deepseek-500);
+  --dsw-alias-state-business-primary: #000000;
   --dsw-alias-state-business-tertiary: var(--dsw-static-deepseek-100);
   --dsw-alias-state-error-primary: var(--dsw-static-red-600);
   --dsw-alias-state-error-secondary: var(--dsw-static-red-400);
@@ -235,16 +235,16 @@ body {
   --dsw-alias-state-warn-tertiary: var(--dsw-static-amber-100);
   --dsw-alias-toast-bg: var(--dsw-static-neutral-bluish-800);
   --dsw-alias-tooltip-bg: var(--dsw-static-neutral-bluish-850);
-  --dsw-specific-bubble-highlight: var(--dsw-static-deepseek-200);
-  --dsw-specific-bubble: var(--dsw-static-deepseek-50);
-  --dsw-specific-input-major: var(--dsw-static-neutral-bluish-00);
-  --dsw-specific-login-input: var(--dsw-static-neutral-bluish-50);
+  --dsw-specific-bubble-highlight: #d5d3cb;
+  --dsw-specific-bubble: #e5e3dc;
+  --dsw-specific-input-major: #f2f0e9;
+  --dsw-specific-login-input: #e0ded6;
   --dsw-specific-menu: var(--dsw-alias-bg-layer-3);
-  --dsw-specific-selector: var(--dsw-static-neutral-bluish-60);
-  --dsw-specific-sidebar-fill: var(--dsw-static-neutral-bluish-50);
-  --dsw-specific-sidebar-nav-item-active-accent: var(--dsw-static-deepseek-100);
-  --dsw-specific-sidebar-nav-item-active: var(--dsw-static-neutral-bluish-100);
-  --dsw-specific-sidebar-nav-item-hover: var(--dsw-static-neutral-bluish-75);
+  --dsw-specific-selector: #e0ded6;
+  --dsw-specific-sidebar-fill: #e9e7e0;
+  --dsw-specific-sidebar-nav-item-active-accent: #d5d3cb;
+  --dsw-specific-sidebar-nav-item-active: #e5e3dc;
+  --dsw-specific-sidebar-nav-item-hover: #e5e3dc;
   --dsw-specific-tip: var(--dsw-static-neutral-bluish-60);
 
   background-color: var(--dsw-alias-bg-base);
@@ -319,7 +319,7 @@ body[data-ds-dark-theme] {
   --dsw-alias-scrollbar-bg-l2: var(--dsw-static-neutral-600);
   --dsw-alias-scrollbar-hover-l1: var(--dsw-static-neutral-600);
   --dsw-alias-scrollbar-hover-l2: var(--dsw-static-neutral-550);
-  --dsw-alias-state-business-primary: var(--dsw-static-deepseek-400);
+  --dsw-alias-state-business-primary: #ffffff;
   --dsw-alias-state-business-tertiary: var(--dsw-static-deepseek-800);
   --dsw-alias-state-error-primary: var(--dsw-static-red-400);
   --dsw-alias-state-error-secondary: var(--dsw-static-red-400);
