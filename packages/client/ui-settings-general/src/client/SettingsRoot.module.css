@@ -235,3 +235,79 @@
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* Phone: the fixed 188px nav rail would squeeze the content column to a sliver,
+   so the panel stacks — the nav becomes a horizontal scrolling strip above the
+   options and the content fills the remaining height. Flipping the panel to
+   column is what stops the nav and content fighting over horizontal space.
+   The breakpoint matches the shell's phone breakpoint (columns.ts
+   MOBILE_BREAKPOINT) so every width that gets the drawer also gets the stacked
+   settings panel. */
+@media (max-width: 767px) {
+  .panel {
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    border-radius: 0;
+  }
+
+  .nav {
+    flex: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    min-width: 0;
+    padding: 8px 12px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--dsw-alias-border-l3);
+  }
+
+  .navTitle {
+    flex: none;
+    padding: 0;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .navList {
+    flex-direction: row;
+    min-width: 0;
+    gap: 4px;
+  }
+
+  .navCell {
+    flex: none;
+    height: 36px;
+    padding: 6px 12px;
+    white-space: nowrap;
+  }
+
+  .content {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .options {
+    padding: 0 16px 16px;
+  }
+}
+
+/* Mobile browsers keep their own URL/nav bars over the page, so the large
+   viewport (vh) is taller than the visible area and a vh-sized panel is
+   centered past the top edge — the nav strip scrolls out of reach. The dynamic
+   viewport (dvh) tracks the bars: prefer it where supported, keep the vh sizes
+   above as the fallback. */
+@supports (height: 100dvh) {
+  .panel {
+    height: min(800px, calc(100dvh - 48px));
+  }
+
+  @media (max-width: 767px) {
+    .panel {
+      height: 100dvh;
+    }
+  }
+}

@@ -35,6 +35,25 @@
   padding: 18px 10px 6px;
 }
 
+/* Phone drawer: below the mobile breakpoint the expanded sidebar is a fixed
+   overlay (AppFrame reserves no sidebar track) floating above the center,
+   which keeps the full width beneath it. The collapsed rail stays a grid
+   track but must still stack above the center column, whose border radius
+   clips over a trackless left edge. The backdrop
+   (AppFrame.module.css .drawerBackdrop, z-index 29) dims the center behind
+   the expanded drawer. */
+:global([data-mobile]) .root {
+  z-index: 30;
+}
+
+:global([data-mobile]) .root:not(.collapsed) {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 30;
+  border-right: 1px solid var(--dsw-alias-border-l3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+}
+
 /* The brand stays in the sidebar; fixed caption controls survive zero-width collapse. */
 :global([data-windows-titlebar]) .root .logoRow {
   height: 40px;

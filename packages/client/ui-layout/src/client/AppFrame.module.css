@@ -157,3 +157,26 @@
 .overlayLayer > * {
   pointer-events: auto;
 }
+
+/* Phone drawer backdrop: a dimmed tap-to-close sheet behind the overlay
+   drawer (SidebarRoot.module.css draws the drawer). Sits above the columns and
+   below the drawer itself; the drawer is the sidebar root's own z-index. */
+.drawerBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 29;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* On phones the sidebar column never reserves a track while the drawer is
+   open, so the (zero-width) column must not clip the fixed drawer that escapes
+   it. The column also needs its own stacking context above the center column,
+   whose border radius otherwise paints its scroll surface over the rail's
+   toggle. */
+.frame[data-mobile] .sidebarCol {
+  overflow: visible;
+  position: relative;
+  z-index: 30;
+}

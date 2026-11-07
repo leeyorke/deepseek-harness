@@ -19,7 +19,7 @@ import type { ReactNode } from 'react'
 import type {
   PropsLocale, PropsRenderSlots, PropsRuntime, PropsStore,
 } from '@deepseek-ai/dsh-client-ui-slots'
-import { computeColumns, RIGHTBAR_DEFAULT_RATIO, SIDEBAR_AUTO_COLLAPSE, SIDEBAR_COLLAPSED, SIDEBAR_DEFAULT } from './columns.ts'
+import { computeColumns, MOBILE_BREAKPOINT, RIGHTBAR_DEFAULT_RATIO, SIDEBAR_AUTO_COLLAPSE, SIDEBAR_COLLAPSED, SIDEBAR_DEFAULT, SIDEBAR_MAX } from './columns.ts'
 import { DocumentTitle } from './DocumentTitle.tsx'
 import type { createLayoutStore } from './stores.ts'
 import css from './AppFrame.module.css'
@@ -158,6 +158,11 @@ export function AppFrame({
   }, [actions])
 
   const narrow = viewport < SIDEBAR_AUTO_COLLAPSE
+  // Phone frames never reserve a sidebar track: the expanded sidebar becomes a
+  // fixed overlay drawer (SidebarRoot.module.css) and the center keeps the full
+  // width beneath it. The rail stays a grid track so the collapsed toggle
+  // remains reachable without a header hamburger.
+  const mobile = viewport <= MOBILE_BREAKPOINT
   const sidebarCollapsed = narrow ? !layoutInfo.narrowExpanded : layoutInfo.sidebar === 0
   const sidebarPreference = sidebarCollapsed
     ? 0
@@ -170,6 +175,13 @@ export function AppFrame({
   // include that space before the occupant's first shown report arrives.
   const normal = computeColumns(viewport, !layoutInfo.rightbarShown && narrow ? 0 : sidebarPreference, rightbarPreference, collapsedWidth)
   const cols = computeColumns(viewport, sidebarPreference, layoutInfo.rightbarTrack ? rightbarPreference : 0, collapsedWidth)
+  // Expanded drawer width on phones: 86% of the frame, capped at the desktop
+  // contract maximum so a large landscape phone reads like a small tablet.
+  const drawerWidth = Math.min(SIDEBAR_MAX, Math.round(viewport * 0.86))
+  // On phones the expanded sidebar is a fixed drawer (no track), but the
+  // collapsed rail keeps its 56px track so it never overlaps the center column.
+  const gridSidebar = mobile ? (sidebarCollapsed ? SIDEBAR_COLLAPSED : 0) : cols.sidebar
+  const gridRightbar = mobile ? 0 : cols.rightbar
   const colsRef = useRef(cols)
   colsRef.current = cols
   const rightbarWidth = useRef(normal.rightbar)
@@ -195,8 +207,10 @@ export function AppFrame({
   const productTitle = process.env.DSH_CLIENT_TITLE ?? t('brand.localBuild')
   const sidebar = useMemo(() => renderSlot('sidebar', {
     collapsed: sidebarCollapsed,
-    width: cols.sidebar,
-  }), [renderSlot, sidebarCollapsed, cols.sidebar])
+    // On phones the expanded sidebar is a fixed drawer at the drawer width; the
+    // collapsed rail keeps its track width.
+    width: mobile ? (sidebarCollapsed ? SIDEBAR_COLLAPSED : drawerWidth) : cols.sidebar,
+  }), [renderSlot, sidebarCollapsed, cols.sidebar, mobile, drawerWidth])
   const main = useMemo(() => (
     <MainPanel usePanelInfo={usePanelInfo} renderSlot={renderSlot} />
   ), [usePanelInfo, renderSlot])
@@ -210,8 +224,9 @@ export function AppFrame({
         ...(document.documentElement.hasAttribute('data-windows-titlebar')
           ? { '--dsh-windows-sidebar-width': `${cols.sidebar}px` } : {}),
         gridTemplateColumns:
-          `${cols.sidebar}px minmax(0, 1fr) ${cols.rightbar}px`,
+          `${gridSidebar}px minmax(0, 1fr) ${gridRightbar}px`,
       }}
+      data-mobile={mobile || undefined}
       data-sidebar-collapsed={sidebarCollapsed || undefined}
       data-rightbar-collapsed={cols.rightbar === 0 || undefined}
       data-rightbar-fullscreen={layoutInfo.rightbarFullscreen || undefined}
@@ -223,6 +238,15 @@ export function AppFrame({
         useSessions={useSessions}
         usePanelInfo={usePanelInfo}
       />
+      {/* Phone drawer backdrop: taps outside the drawer close it. Placed before
+          the sidebar column so the fixed drawer paints above it. */}
+      {mobile && !sidebarCollapsed && (
+        <div
+          className={css.drawerBackdrop}
+          data-drawer-backdrop
+          onClick={() => { actions.toggleSidebar() }}
+        />
+      )}
       <div className={css.sidebarCol}>
         {sidebar}
       </div>
@@ -236,8 +260,8 @@ export function AppFrame({
         {overlays}
       </div>
       {/* The collapsed rail is fixed-width: no resize handle while closed. */}
-      {!sidebarCollapsed && <DragHandle side="sidebar" left={cols.sidebar} onStart={onSidebarStart} onDrag={onSidebarDrag} onEnd={onDragEnd} />}
-      {layoutInfo.rightbarShown && !layoutInfo.rightbarFullscreen && normal.rightbar > 0 && (
+      {!mobile && !sidebarCollapsed && <DragHandle side="sidebar" left={cols.sidebar} onStart={onSidebarStart} onDrag={onSidebarDrag} onEnd={onDragEnd} />}
+      {!mobile && layoutInfo.rightbarShown && !layoutInfo.rightbarFullscreen && normal.rightbar > 0 && (
         <DragHandle side="rightbar" left={viewport - normal.rightbar} onStart={onRightbarStart} onDrag={onRightbarDrag} onEnd={onDragEnd} />
       )}
     </div>

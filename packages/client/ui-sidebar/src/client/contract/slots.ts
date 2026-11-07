@@ -92,6 +92,12 @@ export interface SidebarSectionOwnerProps {
   wide: boolean
   /** Rail icons request expansion; the browser rides the wide flip for focus. */
   expandSidebar: () => void
+  /**
+   * Dismiss the phone overlay drawer after an in-region navigation (opening a
+   * session). Absent on desktop, where the sidebar is a persistent column and
+   * never overlays the content it navigates away from.
+   */
+  dismissDrawer?: () => void
 }
 
 /**

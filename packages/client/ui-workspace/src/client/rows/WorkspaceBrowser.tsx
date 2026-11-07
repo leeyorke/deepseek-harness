@@ -765,13 +765,14 @@ export function WorkspaceBrowser({
   wide,
   usePanelInfo,
   expandSidebar,
+  dismissDrawer,
   useSessions,
   useSessionStatus,
   useWorkspaces,
   useStore,
   actions,
   startSession,
-  open,
+  open: openSession,
   renameSession,
   forkSession,
   renameWorkspace,
@@ -787,6 +788,13 @@ export function WorkspaceBrowser({
   t,
 }: WorkspaceBrowserProps) {
   const home = useHostInfo(info => info.home)
+  // Opening a session from the phone drawer must dismiss it so the transcript
+  // is not left behind the closed panel; on a persistent column this is a no-op
+  // (dismissDrawer is undefined there).
+  const open = (sessionId: SessionId): void => {
+    openSession(sessionId)
+    dismissDrawer?.()
+  }
   // Ordering remains live while the rail or search replaces the list body.
   const list = useSessions(state => state)
   const workspaces = useWorkspaces(state => state.items)

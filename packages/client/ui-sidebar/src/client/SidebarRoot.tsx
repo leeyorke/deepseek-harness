@@ -44,9 +44,10 @@ type PanelRowProps =
   & Pick<PropsRuntime<'sidebar'>, 'usePanelInfo'>
   & Pick<InjectFace<SidebarRootInjected>, 'selectPanel'>
   & PropsRenderSlots<'sidebar.panellist'>
+  & { readonly dismissDrawer: () => void }
 
 /** Each panel row subscribes only to its own selection state. */
-function PanelRow({ id, label, wide, usePanelInfo, selectPanel, renderSlot }: PanelRowProps) {
+function PanelRow({ id, label, wide, usePanelInfo, selectPanel, renderSlot, dismissDrawer }: PanelRowProps) {
   const active = usePanelInfo(info => info.activePanelId === id)
   return (
     <Tooltip label={label} delayMs={500} disabled={wide}>
@@ -55,7 +56,7 @@ function PanelRow({ id, label, wide, usePanelInfo, selectPanel, renderSlot }: Pa
         className={clsx(css.panelRow, active && css.panelActive)}
         aria-label={label}
         aria-current={active ? 'page' : undefined}
-        onClick={() => { selectPanel(id) }}
+        onClick={() => { selectPanel(id); dismissDrawer() }}
       >
         <span className={css.panelGlyph} aria-hidden="true">
           {renderSlot('sidebar.panellist', { size: wide ? 16 : 18, active }, { only: id })}
@@ -153,6 +154,12 @@ export function SidebarRoot({
   }, [pointerInside])
 
   const darwinDesktop = isDarwinDesktop()
+  // On phones the expanded sidebar is an overlay drawer; navigating from it
+  // (panel select, new session) dismisses it so the destination is not left
+  // behind a closed panel. The collapsed rail is not a drawer, so it stays.
+  const dismissDrawer = (): void => {
+    if (!collapsed && column.current?.closest('[data-mobile]') != null) toggleSidebar()
+  }
   // Rail resting state is the whale mark; hovering swaps in the panel icon
   // (the expand affordance, figma sidebar-hover flow). Expanded it is a plain
   // panel icon.
@@ -201,7 +208,7 @@ export function SidebarRoot({
             type="button"
             className={clsx(css.brand, css.wide)}
             aria-label={t('session.new.label')}
-            onClick={() => { startSession() }}
+            onClick={() => { startSession(); dismissDrawer() }}
           >
             <span className={css.brandIdentity} aria-hidden="true">
               <span className={css.brandMark}>
@@ -224,7 +231,7 @@ export function SidebarRoot({
           type="button"
           className={css.newSession}
           aria-label={t('session.new.label')}
-          onClick={() => { startSession() }}
+          onClick={() => { startSession(); dismissDrawer() }}
         >
           <IconNewChatOutline16 size={wide ? 14 : windowsTitlebar ? 16 : 18} />
           {wide && <span className={clsx(css.newSessionLabel, css.wide)}>{t('session.new')}</span>}
@@ -242,6 +249,7 @@ export function SidebarRoot({
               usePanelInfo={usePanelInfo}
               selectPanel={selectPanel}
               renderSlot={renderSlot}
+              dismissDrawer={dismissDrawer}
             />
           ))}
         </nav>
@@ -253,6 +261,7 @@ export function SidebarRoot({
         {renderSlot('sidebar.workspaces', {
           wide,
           expandSidebar: () => { if (collapsed) toggleSidebar() },
+          dismissDrawer,
         })}
       </div>
 
